@@ -1,0 +1,5 @@
+ mpicc  minmax.cpp -lstdc++ -g -o minmax
+mpirun -np 4  ./minmax 10
+
+ g++ -fopenmp omp2.cpp -o omp
+
