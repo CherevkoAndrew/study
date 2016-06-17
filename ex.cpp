@@ -3,13 +3,16 @@
 #include <stdlib.h>
 #include <time.h>
 #include <algorithm> 
-//#include <windows.h>
 #include <math.h>
 using namespace std;
 
+/*
+show minimal absolute valu of difference betwen
+any two members of one-dimensional array
+*/
 #define MAX_I 10000
 
-int simple(int* vector, int size) {
+int simple(int* vector, int size) { // single process computing
 	int result = MAX_I * 3;
 	for (int i = 0; i < size - 1; ++i)
 	{
