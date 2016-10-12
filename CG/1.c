@@ -35,8 +35,27 @@ void Display(void){
   int left = -1, right = 100, top = -1, bottom = 100;
   glClearColor(0, 0, 0, 1);
   glClear(GL_COLOR_BUFFER_BIT);
-  glColor3ub(255,0,0);
 
+  glColor3ub(255,255,0);
+
+  for(int i = 0; i<tlen; i+=3){
+    glBegin(GL_POLYGON);
+      glVertex2fv(triangles[i]);
+      glVertex2fv(triangles[i+1]);
+      glVertex2fv(triangles[i+2]);
+    glEnd();
+  }
+
+  for(int i = 0; i<slen; i+=4){
+    glBegin(GL_POLYGON);
+      glVertex2fv(squares[i]);
+      glVertex2fv(squares[i+1]);
+      glVertex2fv(squares[i+2]);
+      glVertex2fv(squares[i+3]);
+    glEnd();
+  }
+
+  glColor3ub(255,0,0);
 
   for(int i = 0; i<tlen; i+=3){
     glBegin(GL_LINE_LOOP);

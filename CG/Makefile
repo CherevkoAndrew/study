@@ -1,3 +1,3 @@
 all:
-	g++ -lglut -lGL -lGLU cube.c -o 1
+	g++ -lglut -lGL -lGLU 1.c -o 1
 	./1
