@@ -3,11 +3,11 @@
 #include <netinet/in.h>
 #include <stdio.h>
 
-#define N 7
-#define M 2
+#define N 8
+#define M 4
 
 char charBuf[N+1] = "server!";
-long longBuf[M];
+double doubleBuf[M];
 
 int main(void){
   struct sockaddr_in local;
@@ -50,13 +50,13 @@ int main(void){
     return 1;
   }
 
-  rc = recv(s1, longBuf, sizeof(long)*M, 0);
+  rc = recv(s1, doubleBuf, sizeof(double)*M, 0);
   if (rc <= 0){
     perror("ошибка вызова recv");
     return 1;
   }
 
-  printf("%s %ld %ld\n", charBuf, longBuf[0], longBuf[1]);
+  printf("%s %lf %lf %lf %lf\n", charBuf, doubleBuf[0], doubleBuf[1], doubleBuf[2], doubleBuf[3]);
 
   /*rc = send(s1, "2", 1, 0);
   if (rc <= 0)

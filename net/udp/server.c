@@ -3,11 +3,11 @@
 #include <netinet/in.h>
 #include <stdio.h>
 
-#define N 7
-#define M 2
+#define N 8
+#define M 4
 
-char charBuf[N+1] = "server!";
-long longBuf[M];
+char charBuf[N+1];
+double doubleBuf[M];
 
 int main(void){
   struct sockaddr_in local, remote;
@@ -17,7 +17,7 @@ int main(void){
   char buf[1];
 
   local.sin_family = AF_INET;
-  local.sin_port = htons(8080);
+  local.sin_port = htons(8888);
   local.sin_addr.s_addr = htonl(INADDR_ANY);
 
   s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
@@ -39,12 +39,12 @@ int main(void){
     return 1;
   }
 
-  rc = recvfrom(s, longBuf, M*sizeof(long), 0, (sockaddr*)&remote, (socklen_t*)&slen);
+  rc = recvfrom(s, doubleBuf, M*sizeof(double), 0, (sockaddr*)&remote, (socklen_t*)&slen);
   if (rc <= 0){
     perror("ошибка вызова recv udp");
     return 1;
   }
-  printf("%s %ld %ld\n", charBuf, longBuf[0], longBuf[1]);
+  printf("%s %lf %lf %lf %lf\n", charBuf, doubleBuf[0], doubleBuf[1], doubleBuf[2], doubleBuf[3] );
 
   return 0;
 }

@@ -6,17 +6,16 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define N 7
-#define M 2
+#define N 8
+#define M 4
 
 char charBuf[N+1] = "client!";
-long longBuf[M];
+double doubleBuf[M];
 
 int main(void){
   srand((unsigned) time(NULL));
   for (int i = 0; i < M; i++) {
-    longBuf[i] = rand();
-    longBuf[i] = (longBuf[i] << 32) | rand();
+    doubleBuf[i] = 1.*rand()/rand();
   }
 
   struct sockaddr_in peer;
@@ -24,7 +23,7 @@ int main(void){
   int rc;
 
   peer.sin_family = AF_INET;
-  peer.sin_port = htons(9999);
+  peer.sin_port = htons(7777);
   peer.sin_addr.s_addr = inet_addr(/*10.12.40.99"*/"127.0.0.1");
 
   s = socket(AF_INET, SOCK_STREAM, 0);
@@ -42,7 +41,7 @@ int main(void){
     return 1;
   }
 
-  printf("%s %ld %ld\n", charBuf, longBuf[0], longBuf[1]);
+  printf("%s %lf %lf %lf %lf\n", charBuf, doubleBuf[0], doubleBuf[1], doubleBuf[2], doubleBuf[3]);
 
   rc = send(s, charBuf, N, 0);
   if (rc <= 0)
@@ -52,7 +51,7 @@ int main(void){
     return 1;
   }
 
-  rc = send(s, longBuf, sizeof(long)*M, 0);
+  rc = send(s, doubleBuf, sizeof(double)*M, 0);
   if (rc <= 0)
   {
     perror("ошибка вызова send");
