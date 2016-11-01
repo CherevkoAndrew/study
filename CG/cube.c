@@ -49,7 +49,7 @@ drawBox(void)
 	//glBegin(GL_LINE_LOOP);
 		for(float x = -1.; x < 1.; x+=0.1)
 			for(float y = -1.; y < 1.; y+=0.1 ){
-				glBegin(GL_LINE_LOOP);
+				glBegin(GL_LINE_STRIP);
 				glVertex3f(x, y, sin(x) + cos(y));
 				glVertex3f(x+0.1, y, sin(x+0.1)+cos(y) );
 				glVertex3f(x+0.1, y+0.1, sin(x+0.1)+cos(y+0.1));
@@ -122,8 +122,7 @@ void Keyboard( unsigned char key, int x, int y){
  
   glLoadIdentity();
   glMatrixMode(GL_MODELVIEW);
-  gluLookAt(-R*sin(alpha*M_PI)*cos(beta*M_PI),-R*sin(beta*M_PI),-R*cos(alpha*M_PI)*cos(beta*M_PI),0.,0.,0.,0.,1.,0.);
-
+  gluLookAt(R*sin(alpha*M_PI)* cos(beta*M_PI),R*sin(beta*M_PI),R*cos(alpha*M_PI)* cos(beta*M_PI),0.,0.,0.,0.,cos(beta*M_PI)/abs(cos(beta*M_PI)),0.);
   
   printf("%f\n", beta);
   glutPostRedisplay();
